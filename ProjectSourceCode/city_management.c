@@ -5,6 +5,7 @@
 
 void addCity(char cities[MAX_CITIES][20], int *cityCount);
 void renameCity(char cities[MAX_CITIES][20], int *cityCount);
+void removeCity(char cities[MAX_CITIES][20], int *cityCount);
 
 void manageCities(char cities[MAX_CITIES][20], int *cityCount) {
     int key;
@@ -26,6 +27,7 @@ void manageCities(char cities[MAX_CITIES][20], int *cityCount) {
             renameCity(cities, cityCount);
             break;
         case 3:
+            removeCity(cities, cityCount);
             break;
         case -1:
             break;
@@ -58,7 +60,7 @@ void renameCity(char cities[MAX_CITIES][20], int *cityCount) {
             printf("Enter new city name : ");
             scanf("%s", newName);
             strcpy(cities[i], newName);
-	    break;
+            break;
         }
     }
 
@@ -66,4 +68,28 @@ void renameCity(char cities[MAX_CITIES][20], int *cityCount) {
         printf("Cannot find that city!\n");
     }
 
+}
+
+void removeCity(char cities[MAX_CITIES][20], int *cityCount) {
+    int i, j, found = 0;
+    char name[20];
+    printf("Enter city name to remove : ");
+    scanf("%s",name);
+
+    for(i=0; i < *cityCount; i++) {
+        if( strcmp(name, cities[i]) == 0 ) {
+
+            found = 1;
+            (*cityCount)--;
+            for(j=i;j < *cityCount; j++) {
+                strcpy(cities[j], cities[j+1]);
+            }
+            break;
+
+        }
+    }
+
+    if(found == 0) {
+        printf("Cannot find that city!\n");
+    }
 }
