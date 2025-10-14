@@ -6,13 +6,7 @@ void inputDistance(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_
 void viewDistance(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_CITIES][MAX_CITIES]);
 
 void manageDistances(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_CITIES][MAX_CITIES]) {
-    int key, i, j;
-
-    for (i = 0; i < MAX_CITIES; i++) {
-        for (j = 0; j < MAX_CITIES; j++) {
-            distance[i][j] = 0;
-        }
-    }
+    int key;
 
     do {
         printf("\nDistance Management Menu\n");

@@ -7,8 +7,13 @@ void manageCities(char cities[MAX_CITIES][20], int *cityCount);
 void manageDistances(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_CITIES][MAX_CITIES]);
 
 int main() {
-    int choice, cityCount=0, distance[MAX_CITIES][MAX_CITIES];
+    int choice, cityCount=0, distance[MAX_CITIES][MAX_CITIES], i, j;
     char cities[MAX_CITIES][20];
+    for (i = 0; i < MAX_CITIES; i++) {
+        for (j = 0; j < MAX_CITIES; j++) {
+            distance[i][j] = 0;
+        }
+    }
 
     do {
         printf("\nLOGISTICS MANAGEMENT SYSTEM\n");
