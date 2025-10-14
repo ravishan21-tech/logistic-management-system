@@ -1,8 +1,10 @@
 #include <stdio.h>
+#include <string.h>
 
 #define MAX_CITIES 30
 
 void addCity(char cities[MAX_CITIES][20], int *cityCount);
+void renameCity(char cities[MAX_CITIES][20], int *cityCount);
 
 void manageCities(char cities[MAX_CITIES][20], int *cityCount) {
     int key;
@@ -21,6 +23,7 @@ void manageCities(char cities[MAX_CITIES][20], int *cityCount) {
             addCity(cities, cityCount);
             break;
         case 2:
+            renameCity(cities, cityCount);
             break;
         case 3:
             break;
@@ -43,4 +46,24 @@ void addCity(char cities[MAX_CITIES][20], int *cityCount) {
     (*cityCount)++;
 }
 
+void renameCity(char cities[MAX_CITIES][20], int *cityCount) {
+    int i, found = 0;
+    char oldName[20], newName[20];
+    printf("Enter old city name : ");
+    scanf("%s", oldName);
 
+    for(i=0; i < *cityCount; i++) {
+        if( strcmp(oldName, cities[i]) == 0 ) {
+            found = 1;
+            printf("Enter new city name : ");
+            scanf("%s", newName);
+            strcpy(cities[i], newName);
+	    break;
+        }
+    }
+
+    if(found == 0) {
+        printf("Cannot find that city!\n");
+    }
+
+}
