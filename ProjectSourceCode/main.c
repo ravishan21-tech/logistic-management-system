@@ -4,9 +4,10 @@
 #define MAX_CITIES 30
 
 void manageCities(char cities[MAX_CITIES][20], int *cityCount);
+void manageDistances(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_CITIES][MAX_CITIES]);
 
 int main() {
-    int choice, cityCount=0;
+    int choice, cityCount=0, distance[MAX_CITIES][MAX_CITIES];
     char cities[MAX_CITIES][20];
 
     do {
@@ -27,6 +28,7 @@ int main() {
             manageCities(cities, &cityCount);
             break;
         case 2:
+            manageDistances(cities, cityCount, distance);
             break;
         case 3:
             break;
