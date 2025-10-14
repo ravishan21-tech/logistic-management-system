@@ -3,9 +3,16 @@
 #define MAX_CITIES 30
 
 void inputDistance(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_CITIES][MAX_CITIES]);
+void viewDistance(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_CITIES][MAX_CITIES]);
 
 void manageDistances(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_CITIES][MAX_CITIES]) {
-    int key;
+    int key, i, j;
+
+    for (i = 0; i < MAX_CITIES; i++) {
+        for (j = 0; j < MAX_CITIES; j++) {
+            distance[i][j] = 0;
+        }
+    }
 
     do {
         printf("\nDistance Management Menu\n");
@@ -20,6 +27,7 @@ void manageDistances(char cities[MAX_CITIES][20], int cityCount, int distance[MA
             inputDistance(cities, cityCount, distance);
             break;
         case 2:
+            viewDistance(cities, cityCount, distance);
             break;
         case -1:
             break;
@@ -65,4 +73,24 @@ void inputDistance(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_
 
     } while(choice != 'n');
 
+}
+
+void viewDistance(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_CITIES][MAX_CITIES]) {
+    int i, j;
+    if (cityCount == 0) {
+        printf("No cities. Add cities first!\n");
+    } else {
+        printf("\n\t");
+        for (i = 0; i < cityCount; i++) {
+            printf("%-10s", cities[i]);
+        }
+        printf("\n");
+        for (i = 0; i < cityCount; i++) {
+            printf("%s\t", cities[i]);
+            for (j = 0; j < cityCount; j++) {
+                printf("%3d\t", distance[i][j]);
+            }
+            printf("\n");
+        }
+    }
 }
