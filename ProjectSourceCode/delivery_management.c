@@ -90,7 +90,7 @@ int calculateDelivery(char cities[MAX_CITIES][20], int cityCount, int distance[M
     double fuelUsed = d / e;
     double fuelCost = fuelUsed * FUEL_PRICE;
     double totalOperationalCost = deliveryCost + fuelCost;
-    double profit = deliveryCost * 0.25;
+    double profit = totalOperationalCost * 0.25;
     double customerCharge = totalOperationalCost + profit;
     double time = d / s;
 
@@ -103,7 +103,7 @@ int calculateDelivery(char cities[MAX_CITIES][20], int cityCount, int distance[M
     printf("Vehicle: %s\n", vehicleNames[vehicleType - 1]);
     printf("Weight: %.2f kg\n", weight);
     printf("------------------------------------------------------\n");
-    printf("Base Cost: %.2f LKR\n", deliveryCost);
+    printf("Base Cost: %d x %.0f x (1 + %.0f/10000) = %.2f LKR\n", d, r, weight, deliveryCost);
     printf("Fuel Used: %.2f L\n", fuelUsed);
     printf("Fuel Cost: %.2f LKR\n", fuelCost);
     printf("Operational Cost: %.2f LKR\n", totalOperationalCost);
