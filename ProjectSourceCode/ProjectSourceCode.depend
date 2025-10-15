@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1760458554 source:c:\users\sameera\onedrive\desktop\logistic-management-system\projectsourcecode\main.c
+1760497015 source:c:\users\sameera\onedrive\desktop\logistic-management-system\projectsourcecode\main.c
 	<stdio.h>
 	<stdlib.h>
 
@@ -7,6 +7,9 @@
 	<stdio.h>
 	<string.h>
 
-1760459526 source:c:\users\sameera\onedrive\desktop\logistic-management-system\projectsourcecode\distance_management.c
+1760461560 source:c:\users\sameera\onedrive\desktop\logistic-management-system\projectsourcecode\distance_management.c
+	<stdio.h>
+
+1760497205 source:c:\users\sameera\onedrive\desktop\logistic-management-system\projectsourcecode\vehicle_management.c
 	<stdio.h>
 
