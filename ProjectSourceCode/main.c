@@ -7,6 +7,8 @@
 void manageCities(char cities[MAX_CITIES][20], int *cityCount);
 void manageDistances(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_CITIES][MAX_CITIES]);
 void showVehicles(char vehicleNames[VEHICLE_TYPES][10], int capacity[VEHICLE_TYPES], int ratePerKm[VEHICLE_TYPES], int speed[VEHICLE_TYPES], int efficiency[VEHICLE_TYPES]);
+void manageDeliveries(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_CITIES][MAX_CITIES], char vehicleNames[VEHICLE_TYPES][10],
+                      int capacity[VEHICLE_TYPES]);
 
 int main() {
     int choice, cityCount=0, distance[MAX_CITIES][MAX_CITIES], i, j;
@@ -47,6 +49,7 @@ int main() {
             showVehicles(vehicleNames, capacity, ratePerKm, speed, efficiency);
             break;
         case 4:
+            manageDeliveries(cities, cityCount, distance, vehicleNames, capacity);
             break;
         case 5:
             break;

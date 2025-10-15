@@ -34,6 +34,9 @@
 		<Unit filename="city_management.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="delivery_management.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="distance_management.c">
 			<Option compilerVar="CC" />
 		</Unit>
