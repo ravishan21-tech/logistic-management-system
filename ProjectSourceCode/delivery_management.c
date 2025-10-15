@@ -2,9 +2,19 @@
 
 #define MAX_CITIES 30
 #define VEHICLE_TYPES 3
+#define MAX_DELIVERIES 50
+#define FUEL_PRICE 310.0
+
+int calculateDelivery(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_CITIES][MAX_CITIES], char vehicleNames[VEHICLE_TYPES][10],
+                      int capacity[VEHICLE_TYPES], int ratePerKm[VEHICLE_TYPES], int speed[VEHICLE_TYPES], int efficiency[VEHICLE_TYPES],
+                      int fromList[MAX_DELIVERIES], int toList[MAX_DELIVERIES], double weightList[MAX_DELIVERIES], int vehicleList[MAX_DELIVERIES],
+                      double totalCostList[MAX_DELIVERIES], double timeList[MAX_DELIVERIES], int from, int to, double weight, int vehicleType, int deliveryCount);
+
 
 void manageDeliveries(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_CITIES][MAX_CITIES], char vehicleNames[VEHICLE_TYPES][10],
-                      int capacity[VEHICLE_TYPES]) {
+                      int capacity[VEHICLE_TYPES], int ratePerKm[VEHICLE_TYPES], int speed[VEHICLE_TYPES], int efficiency[VEHICLE_TYPES],
+                      int fromList[MAX_DELIVERIES], int toList[MAX_DELIVERIES], double weightList[MAX_DELIVERIES], int vehicleList[MAX_DELIVERIES],
+                      double totalCostList[MAX_DELIVERIES], double timeList[MAX_DELIVERIES], int *deliveryCount) {
 
     int from, to, vehicleType, i;
     double weight;
@@ -54,6 +64,66 @@ void manageDeliveries(char cities[MAX_CITIES][20], int cityCount, int distance[M
         printf("Weight exceeds vehicle capacity!\n");
         return;
     }
+
+    *deliveryCount = calculateDelivery(cities, cityCount, distance, vehicleNames, capacity,
+                                      ratePerKm, speed, efficiency, fromList, toList, weightList, vehicleList,
+                                      totalCostList, timeList, from, to, weight, vehicleType, *deliveryCount);
+
+}
+
+int calculateDelivery(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_CITIES][MAX_CITIES], char vehicleNames[VEHICLE_TYPES][10],
+                      int capacity[VEHICLE_TYPES], int ratePerKm[VEHICLE_TYPES], int speed[VEHICLE_TYPES], int efficiency[VEHICLE_TYPES],
+                      int fromList[MAX_DELIVERIES], int toList[MAX_DELIVERIES], double weightList[MAX_DELIVERIES], int vehicleList[MAX_DELIVERIES],
+                      double totalCostList[MAX_DELIVERIES], double timeList[MAX_DELIVERIES], int from, int to, double weight, int vehicleType, int deliveryCount) {
+
+    int d = distance[from - 1][to - 1];
+    if (d <= 0) {
+        printf("Distance not found between selected cities.\n");
+        return deliveryCount;
+    }
+
+    double r = ratePerKm[vehicleType - 1];
+    double s = speed[vehicleType - 1];
+    double e = efficiency[vehicleType - 1];
+
+    double deliveryCost = d * r * (1 + (weight / 10000.0));
+    double fuelUsed = d / e;
+    double fuelCost = fuelUsed * FUEL_PRICE;
+    double totalOperationalCost = deliveryCost + fuelCost;
+    double profit = deliveryCost * 0.25;
+    double customerCharge = totalOperationalCost + profit;
+    double time = d / s;
+
+    printf("\n======================================================\n");
+    printf("DELIVERY COST ESTIMATION\n");
+    printf("------------------------------------------------------\n");
+    printf("From: %s\n", cities[from - 1]);
+    printf("To: %s\n", cities[to - 1]);
+    printf("Distance: %d km\n", d);
+    printf("Vehicle: %s\n", vehicleNames[vehicleType - 1]);
+    printf("Weight: %.2f kg\n", weight);
+    printf("------------------------------------------------------\n");
+    printf("Base Cost: %.2f LKR\n", deliveryCost);
+    printf("Fuel Used: %.2f L\n", fuelUsed);
+    printf("Fuel Cost: %.2f LKR\n", fuelCost);
+    printf("Operational Cost: %.2f LKR\n", totalOperationalCost);
+    printf("Profit: %.2f LKR\n", profit);
+    printf("Customer Charge: %.2f LKR\n", customerCharge);
+    printf("Estimated Time: %.2f hours\n", time);
+    printf("======================================================\n");
+
+    if (deliveryCount < MAX_DELIVERIES) {
+        fromList[deliveryCount] = from;
+        toList[deliveryCount] = to;
+        weightList[deliveryCount] = weight;
+        vehicleList[deliveryCount] = vehicleType;
+        totalCostList[deliveryCount] = customerCharge;
+        timeList[deliveryCount] = time;
+        deliveryCount++;
+    } else {
+        printf("Maximum delivery count reached!\n");
+    }
+    return deliveryCount;
 }
 
 

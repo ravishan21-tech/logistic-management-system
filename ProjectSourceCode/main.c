@@ -3,21 +3,25 @@
 
 #define MAX_CITIES 30
 #define VEHICLE_TYPES 3
+#define MAX_DELIVERIES 50
 
 void manageCities(char cities[MAX_CITIES][20], int *cityCount);
 void manageDistances(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_CITIES][MAX_CITIES]);
 void showVehicles(char vehicleNames[VEHICLE_TYPES][10], int capacity[VEHICLE_TYPES], int ratePerKm[VEHICLE_TYPES], int speed[VEHICLE_TYPES], int efficiency[VEHICLE_TYPES]);
 void manageDeliveries(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_CITIES][MAX_CITIES], char vehicleNames[VEHICLE_TYPES][10],
-                      int capacity[VEHICLE_TYPES]);
+                      int capacity[VEHICLE_TYPES], int ratePerKm[VEHICLE_TYPES], int speed[VEHICLE_TYPES], int efficiency[VEHICLE_TYPES],
+                      int fromList[MAX_DELIVERIES], int toList[MAX_DELIVERIES], double weightList[MAX_DELIVERIES], int vehicleList[MAX_DELIVERIES],
+                      double totalCostList[MAX_DELIVERIES], double timeList[MAX_DELIVERIES], int *deliveryCount);
 
 int main() {
-    int choice, cityCount=0, distance[MAX_CITIES][MAX_CITIES], i, j;
+    int choice, cityCount=0, distance[MAX_CITIES][MAX_CITIES], i, j, fromList[MAX_DELIVERIES], toList[MAX_DELIVERIES], vehicleList[MAX_DELIVERIES], deliveryCount = 0;
     char cities[MAX_CITIES][20];
     int capacity[VEHICLE_TYPES] = {1000, 5000, 10000};
     int ratePerKm[VEHICLE_TYPES] = {30, 40, 80};
     int speed[VEHICLE_TYPES] = {60, 50, 45};
     int efficiency[VEHICLE_TYPES] = {12, 6, 4};
     char vehicleNames[VEHICLE_TYPES][10] = {"Van", "Truck", "Lorry"};
+    double weightList[MAX_DELIVERIES], totalCostList[MAX_DELIVERIES], timeList[MAX_DELIVERIES];
 
     for (i = 0; i < MAX_CITIES; i++) {
         for (j = 0; j < MAX_CITIES; j++) {
@@ -49,7 +53,9 @@ int main() {
             showVehicles(vehicleNames, capacity, ratePerKm, speed, efficiency);
             break;
         case 4:
-            manageDeliveries(cities, cityCount, distance, vehicleNames, capacity);
+            manageDeliveries(cities, cityCount, distance, vehicleNames, capacity, ratePerKm,
+                            speed, efficiency, fromList, toList, weightList, vehicleList,
+                            totalCostList, timeList, &deliveryCount);
             break;
         case 5:
             break;

@@ -6,7 +6,7 @@ void showVehicles(char vehicleNames[VEHICLE_TYPES][10], int capacity[VEHICLE_TYP
 
 void showVehicles(char vehicleNames[VEHICLE_TYPES][10], int capacity[VEHICLE_TYPES], int ratePerKm[VEHICLE_TYPES], int speed[VEHICLE_TYPES], int efficiency[VEHICLE_TYPES]) {
     printf("\nVEHICLE DETAILS\n");
-    printf("Type\t\tCapacity(kg)\t\t\tRate/km\tSpeed(km/h)\tEfficiency(km/l)\n");
+    printf("Type\t\tCapacity(kg)\t\tRate/km\tSpeed(km/h)\tEfficiency(km/l)\n");
     printf("------------------------------------------------------------------\n");
 
     int i;
