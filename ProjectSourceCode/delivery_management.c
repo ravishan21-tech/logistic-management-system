@@ -9,6 +9,11 @@ void manageDeliveries(char cities[MAX_CITIES][20], int cityCount, int distance[M
     int from, to, vehicleType, i;
     double weight;
 
+    if (cityCount < 2) {
+        printf("Add at least 2 cities first!\n");
+        return;
+    }
+
     printf("\nDELIVERY REQUEST\n");
     printf("---------------------\n");
     printf("Index\tCity\n");
@@ -22,6 +27,15 @@ void manageDeliveries(char cities[MAX_CITIES][20], int cityCount, int distance[M
     printf("Enter destination city index: ");
     scanf("%d", &to);
 
+    if (from < 1 || from > cityCount || to < 1 || to > cityCount) {
+        printf("Invalid city index!\n");
+        return;
+    }
+    if (from == to) {
+        printf("Source and destination cannot same!\n");
+        return;
+    }
+
     printf("Enter weight (kg): ");
     scanf("%lf", &weight);
 
@@ -32,6 +46,14 @@ void manageDeliveries(char cities[MAX_CITIES][20], int cityCount, int distance[M
     printf("\nEnter vehicle type (1-3) : ");
     scanf("%d", &vehicleType);
 
+    if (vehicleType < 1 || vehicleType > VEHICLE_TYPES) {
+        printf("Invalid vehicle!\n");
+        return;
+    }
+    if (weight > capacity[vehicleType - 1]) {
+        printf("Weight exceeds vehicle capacity!\n");
+        return;
+    }
 }
 
 
