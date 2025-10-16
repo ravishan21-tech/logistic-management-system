@@ -12,6 +12,9 @@ void manageDeliveries(char cities[MAX_CITIES][20], int cityCount, int distance[M
                       int capacity[VEHICLE_TYPES], int ratePerKm[VEHICLE_TYPES], int speed[VEHICLE_TYPES], int efficiency[VEHICLE_TYPES],
                       int fromList[MAX_DELIVERIES], int toList[MAX_DELIVERIES], double weightList[MAX_DELIVERIES], int vehicleList[MAX_DELIVERIES],
                       double totalCostList[MAX_DELIVERIES], double timeList[MAX_DELIVERIES], int *deliveryCount);
+void showReport(char cities[MAX_CITIES][20], int distance[MAX_CITIES][MAX_CITIES], int fromList[MAX_DELIVERIES],
+                      int toList[MAX_DELIVERIES], double totalCostList[MAX_DELIVERIES], double timeList[MAX_DELIVERIES],
+                      int deliveryCount);
 
 int main() {
     int choice, cityCount=0, distance[MAX_CITIES][MAX_CITIES], i, j, fromList[MAX_DELIVERIES], toList[MAX_DELIVERIES], vehicleList[MAX_DELIVERIES], deliveryCount = 0;
@@ -58,6 +61,7 @@ int main() {
                             totalCostList, timeList, &deliveryCount);
             break;
         case 5:
+            showReport(cities, distance, fromList, toList, totalCostList, timeList, deliveryCount);
             break;
         case -1:
             printf("Program Exited...\n");
