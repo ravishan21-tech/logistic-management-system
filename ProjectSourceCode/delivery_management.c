@@ -9,6 +9,7 @@ int calculateDelivery(char cities[MAX_CITIES][20], int cityCount, int distance[M
                       int capacity[VEHICLE_TYPES], int ratePerKm[VEHICLE_TYPES], int speed[VEHICLE_TYPES], int efficiency[VEHICLE_TYPES],
                       int fromList[MAX_DELIVERIES], int toList[MAX_DELIVERIES], double weightList[MAX_DELIVERIES], int vehicleList[MAX_DELIVERIES],
                       double totalCostList[MAX_DELIVERIES], double timeList[MAX_DELIVERIES], int from, int to, double weight, int vehicleType, int deliveryCount);
+int findShortestPath(int distance[MAX_CITIES][MAX_CITIES], int cityCount, int from, int to);
 
 
 void manageDeliveries(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_CITIES][MAX_CITIES], char vehicleNames[VEHICLE_TYPES][10],
@@ -76,7 +77,7 @@ int calculateDelivery(char cities[MAX_CITIES][20], int cityCount, int distance[M
                       int fromList[MAX_DELIVERIES], int toList[MAX_DELIVERIES], double weightList[MAX_DELIVERIES], int vehicleList[MAX_DELIVERIES],
                       double totalCostList[MAX_DELIVERIES], double timeList[MAX_DELIVERIES], int from, int to, double weight, int vehicleType, int deliveryCount) {
 
-    int d = distance[from - 1][to - 1];
+    int d = findShortestPath(distance, cityCount, from - 1, to - 1);
     if (d <= 0) {
         printf("Distance not found between selected cities.\n");
         return deliveryCount;
@@ -126,5 +127,37 @@ int calculateDelivery(char cities[MAX_CITIES][20], int cityCount, int distance[M
     return deliveryCount;
 }
 
+int findShortestPath(int distance[MAX_CITIES][MAX_CITIES], int cityCount, int from, int to) {
+    int visitedCity[MAX_CITIES] = {0};
+    int shortestDis[MAX_CITIES], i, j;
 
+    for (i = 0; i < cityCount; i++) {
+        shortestDis[i] = 999999;
+    }
+
+    shortestDis[from] = 0;
+
+    for (i = 0; i < cityCount - 1; i++) {
+        int minValue = 999999;
+        int currentCity = -1;
+
+        for (j = 0; j < cityCount; j++) {
+            if (!visitedCity[j] && shortestDis[j] <= minValue) {
+                minValue = shortestDis[j];
+                currentCity = j;
+            }
+        }
+
+        visitedCity[currentCity] = 1;
+
+        for (j = 0; j < cityCount; j++) {
+            if (!visitedCity[j] && distance[currentCity][j] > 0 &&
+                shortestDis[currentCity] + distance[currentCity][j] < shortestDis[j]) {
+
+                shortestDis[j] = shortestDis[currentCity] + distance[currentCity][j];
+            }
+        }
+    }
+    return shortestDis[to];
+}
 

@@ -43,6 +43,9 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="performance_report.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="vehicle_management.c">
 			<Option compilerVar="CC" />
 		</Unit>

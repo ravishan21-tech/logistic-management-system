@@ -12,9 +12,10 @@ void showReport(char cities[MAX_CITIES][20], int distance[MAX_CITIES][MAX_CITIES
     }
 
     double totalRevenue = 0.0, totalTime = 0.0;
-    int totalDistance = 0, longest = distance[fromList[0] - 1][toList[0] - 1], shortest = distance[fromList[0] - 1][toList[0] - 1];
+    int totalDistance = 0, i;
+    int longest = distance[fromList[0] - 1][toList[0] - 1], shortest = distance[fromList[0] - 1][toList[0] - 1];
 
-    for (int i = 0; i < deliveryCount; i++) {
+    for (i = 0; i < deliveryCount; i++) {
         totalRevenue += totalCostList[i];
         totalTime += timeList[i];
 
