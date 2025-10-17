@@ -2,9 +2,12 @@
 #include <stdlib.h>
 
 #define MAX_CITIES 30
+#define MAX_DELIVERIES 50
 
-void saveData(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_CITIES][MAX_CITIES]) {
+void saveData(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_CITIES][MAX_CITIES], int fromList[MAX_DELIVERIES],
+              int toList[MAX_DELIVERIES], double totalCostList[MAX_DELIVERIES], double timeList[MAX_DELIVERIES], int deliveryCount) {
     FILE *routeFile = fopen("routes.txt", "w");
+    FILE *deliveriesFile = fopen("deliveries.txt", "w");
 
     int i, j;
     if (routeFile != NULL) {
@@ -20,10 +23,22 @@ void saveData(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_CITIE
         }
         fclose(routeFile);
     }
+
+    if (deliveriesFile != NULL) {
+        fprintf(deliveriesFile, "%d\n", deliveryCount);
+        for (i = 0; i < deliveryCount; i++) {
+            fprintf(deliveriesFile, "%d %d %.2f %.2f\n",
+                    fromList[i], toList[i],
+                    totalCostList[i], timeList[i]);
+        }
+        fclose(deliveriesFile);
+    }
 }
 
-void loadData(char cities[MAX_CITIES][20], int *cityCount, int distance[MAX_CITIES][MAX_CITIES]) {
+void loadData(char cities[MAX_CITIES][20], int *cityCount, int distance[MAX_CITIES][MAX_CITIES], int fromList[MAX_DELIVERIES],
+              int toList[MAX_DELIVERIES], double totalCostList[MAX_DELIVERIES], double timeList[MAX_DELIVERIES], int *deliveryCount) {
     FILE *routeFile = fopen("routes.txt", "r");
+    FILE *deliveriesFile = fopen("deliveries.txt", "r");
 
     int i, j;
     if (routeFile != NULL) {
@@ -41,5 +56,19 @@ void loadData(char cities[MAX_CITIES][20], int *cityCount, int distance[MAX_CITI
     } else {
         printf("No previous routes found!\n");
     }
+
+    if (deliveriesFile != NULL) {
+        fscanf(deliveriesFile, "%d", deliveryCount);
+        for (i = 0; i < *deliveryCount; i++) {
+            fscanf(deliveriesFile, "%d %d %lf %lf",
+                   &fromList[i], &toList[i],
+                   &totalCostList[i], &timeList[i]);
+        }
+        fclose(deliveriesFile);
+        printf("Deliveries loaded successfully.\n");
+    } else {
+        printf("No previous delivery data found!\n");
+    }
+
 }
 
