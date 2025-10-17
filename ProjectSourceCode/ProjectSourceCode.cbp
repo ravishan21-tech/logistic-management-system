@@ -40,6 +40,9 @@
 		<Unit filename="distance_management.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="file_handling.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

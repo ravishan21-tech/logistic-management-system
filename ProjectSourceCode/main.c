@@ -15,6 +15,8 @@ void manageDeliveries(char cities[MAX_CITIES][20], int cityCount, int distance[M
 void showReport(char cities[MAX_CITIES][20], int distance[MAX_CITIES][MAX_CITIES], int fromList[MAX_DELIVERIES],
                       int toList[MAX_DELIVERIES], double totalCostList[MAX_DELIVERIES], double timeList[MAX_DELIVERIES],
                       int deliveryCount);
+void saveData(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_CITIES][MAX_CITIES]);
+void loadData(char cities[MAX_CITIES][20], int *cityCount, int distance[MAX_CITIES][MAX_CITIES]);
 
 int main() {
     int choice, cityCount=0, distance[MAX_CITIES][MAX_CITIES], i, j, fromList[MAX_DELIVERIES], toList[MAX_DELIVERIES], vehicleList[MAX_DELIVERIES], deliveryCount = 0;
@@ -31,6 +33,8 @@ int main() {
             distance[i][j] = 0;
         }
     }
+
+    loadData(cities, &cityCount, distance);
 
     do {
         printf("\nLOGISTICS MANAGEMENT SYSTEM\n");
@@ -64,8 +68,10 @@ int main() {
             showReport(cities, distance, fromList, toList, totalCostList, timeList, deliveryCount);
             break;
         case -1:
-            printf("Program Exited...\n");
+            saveData(cities, cityCount, distance);
+            printf("Data Saved and Program Exited...\n");
             break;
+
         default:
             printf("Invalid Choice!\n");
         }
