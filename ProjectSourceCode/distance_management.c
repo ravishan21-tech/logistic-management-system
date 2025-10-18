@@ -62,6 +62,8 @@ void inputDistance(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_
             }
         }
 
+        printf("Distance between %s and %s set to %d km\n", cities[cityOne], cities[cityTwo], distance[cityOne][cityTwo]);
+
         printf("Do you want to add new distance? (y/n) : ");
         scanf(" %c",&choice);
 

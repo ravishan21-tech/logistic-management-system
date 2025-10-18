@@ -33,6 +33,8 @@ void saveData(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_CITIE
         }
         fclose(deliveriesFile);
     }
+
+    printf("Data saved successfully to files\n");
 }
 
 void loadData(char cities[MAX_CITIES][20], int *cityCount, int distance[MAX_CITIES][MAX_CITIES], int fromList[MAX_DELIVERIES],
@@ -52,7 +54,6 @@ void loadData(char cities[MAX_CITIES][20], int *cityCount, int distance[MAX_CITI
             }
         }
         fclose(routeFile);
-        printf("Routes loaded...\n");
     } else {
         printf("No previous routes found!\n");
     }
@@ -65,10 +66,10 @@ void loadData(char cities[MAX_CITIES][20], int *cityCount, int distance[MAX_CITI
                    &totalCostList[i], &timeList[i]);
         }
         fclose(deliveriesFile);
-        printf("Deliveries loaded successfully.\n");
     } else {
         printf("No previous delivery data found!\n");
     }
 
+    printf("Data loaded successfully from files\n");
 }
 

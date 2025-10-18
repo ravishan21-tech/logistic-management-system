@@ -5,7 +5,7 @@
 #define VEHICLE_TYPES 3
 #define MAX_DELIVERIES 50
 
-void manageCities(char cities[MAX_CITIES][20], int *cityCount);
+void manageCities(char cities[MAX_CITIES][20], int *cityCount, int distance[MAX_CITIES][MAX_CITIES]);
 void manageDistances(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_CITIES][MAX_CITIES]);
 void showVehicles(char vehicleNames[VEHICLE_TYPES][10], int capacity[VEHICLE_TYPES], int ratePerKm[VEHICLE_TYPES], int speed[VEHICLE_TYPES], int efficiency[VEHICLE_TYPES]);
 void manageDeliveries(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_CITIES][MAX_CITIES], char vehicleNames[VEHICLE_TYPES][10],
@@ -53,7 +53,7 @@ int main() {
 
         switch(choice) {
         case 1:
-            manageCities(cities, &cityCount);
+            manageCities(cities, &cityCount, distance);
             break;
         case 2:
             manageDistances(cities, cityCount, distance);
