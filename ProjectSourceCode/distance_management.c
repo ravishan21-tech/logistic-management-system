@@ -76,15 +76,15 @@ void viewDistance(char cities[MAX_CITIES][20], int cityCount, int distance[MAX_C
     if (cityCount == 0) {
         printf("No cities. Add cities first!\n");
     } else {
-        printf("\n\t");
+        printf("\n\t\t");
         for (i = 0; i < cityCount; i++) {
-            printf("%-10s", cities[i]);
+            printf("%s\t", cities[i]);
         }
         printf("\n");
         for (i = 0; i < cityCount; i++) {
-            printf("%s\t", cities[i]);
+            printf("%-10s\t", cities[i]);
             for (j = 0; j < cityCount; j++) {
-                printf("%3d\t", distance[i][j]);
+                printf("%6d\t", distance[i][j]);
             }
             printf("\n");
         }
